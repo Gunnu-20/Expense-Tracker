@@ -3,11 +3,11 @@ import { Toaster } from 'react-hot-toast';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { ThemeProvider } from './context/ThemeContext';
 import Sidebar from './components/layout/Sidebar';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
-import Dashboard from './pages/Dashboard';
-import Expenses from './pages/Expenses';
-import Budget from './pages/Budget';
+import Login from './pages/Login.jsx';
+import Signup from './pages/Signup.jsx';
+import Dashboard from './pages/Dashboard.jsx';
+import Expenses from './pages/Expenses.jsx';
+import Budget from './pages/Budget.jsx';
 
 // ─── Protected Layout ─────────────────────────────────────────
 function AppLayout() {

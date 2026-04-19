@@ -21,7 +21,7 @@ const app = express();
 
 // ─── Middleware ───────────────────────────────────────────────
 app.use(cors({
-  origin: 'https://expense-tracker-frontend-4-omez.onrender.com',
+  origin: 'https://expense-tracker-client-zf2q.onrender.com',
   credentials: true,
 }));
 app.use(express.json());

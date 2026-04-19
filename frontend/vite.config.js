@@ -6,12 +6,4 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   plugins: [react(),
   tailwindcss(),],
-  server: {
-    proxy: {
-      '/api': {
-        target: 'https://expense-tracker-backend-aanr.onrender.com/api',
-        changeOrigin: true,
-      },
-    },
-  },
 })

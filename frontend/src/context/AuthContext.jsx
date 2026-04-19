@@ -28,6 +28,7 @@ export const AuthProvider = ({ children }) => {
     const { data } = await api.post('/auth/login', { email, password });
     localStorage.setItem('accessToken', data.accessToken);
     setUser(data.user);
+    Navigate('/dashboard');
   }, []);
 
   const signup = useCallback(async (name, email, password) => {

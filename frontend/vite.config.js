@@ -9,7 +9,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://expense-tracker-backend-9nrf.onrender.com',
+        target: 'https://expense-tracker-backend-aanr.onrender.com',
         changeOrigin: true,
       },
     },

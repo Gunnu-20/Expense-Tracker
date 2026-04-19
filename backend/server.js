@@ -16,7 +16,6 @@ import { globalLimiter } from './middleware/rateLimiter.js';
 
 
 connectDB();
-
 const app = express();
 
 // ─── Middleware ───────────────────────────────────────────────

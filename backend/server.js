@@ -20,7 +20,10 @@ const app = express();
 
 // ─── Middleware ───────────────────────────────────────────────
 app.use(cors({
-  origin: 'https://expense-tracker-client-zf2q.onrender.com',
+  origin: [
+    'http://localhost:5173',
+    'https://expense-tracker-client-zf2q.onrender.com'
+  ],
   credentials: true,
 }));
 app.use(express.json());

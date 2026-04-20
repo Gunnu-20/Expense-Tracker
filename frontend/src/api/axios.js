@@ -1,8 +1,12 @@
 import axios from 'axios';
 
+const BASE_URL = import.meta.env.PROD
+  ? 'https://expense-tracker-backend-aanr.onrender.com/api'
+  : '/api';
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "/api",
-  withCredentials: true, // sends cookies (refresh token)
+  baseURL: BASE_URL,
+  withCredentials: true,
 });
 
 let isRefreshing = false;
@@ -13,14 +17,12 @@ const processQueue = (error, token = null) => {
   failedQueue = [];
 };
 
-// ─── Attach access token to every request ─────────────────────
 api.interceptors.request.use(config => {
   const token = localStorage.getItem('accessToken');
   if (token) config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
 
-// ─── Auto-refresh on 401 ──────────────────────────────────────
 api.interceptors.response.use(
   res => res,
   async error => {
@@ -44,7 +46,11 @@ api.interceptors.response.use(
       isRefreshing = true;
 
       try {
-        const { data } = await axios.post('/api/auth/refresh', {}, { withCredentials: true });
+        const { data } = await axios.post(
+          'https://expense-tracker-backend-aanr.onrender.com/api/auth/refresh',
+          {},
+          { withCredentials: true }
+        );
         const newToken = data.accessToken;
         localStorage.setItem('accessToken', newToken);
         processQueue(null, newToken);

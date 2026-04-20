@@ -5,22 +5,30 @@ const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser]       = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true); // shuru mein true
 
-  // Restore session on page refresh
   useEffect(() => {
     const restore = async () => {
       const token = localStorage.getItem('accessToken');
-      if (!token) { setLoading(false); return; }
+      
+      // token nahi hai toh loading false karo, login pe raho
+      if (!token) {
+        setLoading(false);
+        return;
+      }
+
       try {
         const { data } = await api.get('/auth/me');
         setUser(data);
       } catch {
+        // token invalid hai — clear karo
         localStorage.removeItem('accessToken');
+        setUser(null);
       } finally {
         setLoading(false);
       }
     };
+
     restore();
   }, []);
 
@@ -28,7 +36,6 @@ export const AuthProvider = ({ children }) => {
     const { data } = await api.post('/auth/login', { email, password });
     localStorage.setItem('accessToken', data.accessToken);
     setUser(data.user);
-
   }, []);
 
   const signup = useCallback(async (name, email, password) => {
@@ -38,9 +45,14 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const logout = useCallback(async () => {
-    await api.post('/auth/logout');
-    localStorage.removeItem('accessToken');
-    setUser(null);
+    try {
+      await api.post('/auth/logout');
+    } catch {
+      // ignore
+    } finally {
+      localStorage.removeItem('accessToken');
+      setUser(null);
+    }
   }, []);
 
   return (

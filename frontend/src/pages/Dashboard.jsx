@@ -7,11 +7,11 @@ import CategoryChart from '../components/dashboard/CategoryChart';
 import { formatCurrency, formatDate, CATEGORY_ICONS } from '../utils/helpers';
 
 export default function Dashboard() {
-  const { user }          = useAuth();
-  const [data, setData]   = useState(null);
+  const { user } = useAuth();
+  const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [month] = useState(new Date().getMonth());
-  const [year]  = useState(new Date().getFullYear());
+  const [year] = useState(new Date().getFullYear());
 
   useEffect(() => {
     api.get('/dashboard', { params: { month, year } })
@@ -22,8 +22,9 @@ export default function Dashboard() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div>
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+      {/* Header */}
+      <div className="mb-6">
+        <h1 className="text-xl lg:text-2xl font-bold text-gray-900 dark:text-white">
           Good {new Date().getHours() < 12 ? 'morning' : 'evening'}, {user?.name?.split(' ')[0]} 👋
         </h1>
         <p className="text-sm text-gray-500 mt-1">
@@ -38,8 +39,8 @@ export default function Dashboard() {
         currency={user?.currency}
       />
 
-      {/* Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      {/* Charts — stack on mobile */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6">
         <div className="lg:col-span-2">
           <MonthlyChart trend={data?.monthlyTrend} />
         </div>

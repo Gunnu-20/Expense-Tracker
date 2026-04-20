@@ -15,11 +15,11 @@ export default function Expenses() {
   const { user } = useAuth();
   const { expenses, pagination, loading, fetchExpenses, createExpense, updateExpense, deleteExpense, exportCSV } = useExpenses();
 
-  const [filters, setFilters]       = useState(DEFAULT_FILTERS);
-  const [page, setPage]             = useState(1);
-  const [modalOpen, setModalOpen]   = useState(false);
-  const [editing, setEditing]       = useState(null);
-  const [saving, setSaving]         = useState(false);
+  const [filters, setFilters] = useState(DEFAULT_FILTERS);
+  const [page, setPage] = useState(1);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [editing, setEditing] = useState(null);
+  const [saving, setSaving] = useState(false);
 
   const load = useCallback(() => {
     fetchExpenses({ ...filters, page, limit: 10 });
@@ -56,23 +56,23 @@ export default function Expenses() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Transactions</h1>
+          <h1 className="text-xl lg:text-2xl font-bold text-gray-900 dark:text-white">Transactions</h1>
           <p className="text-sm text-gray-500">{pagination.total || 0} total records</p>
         </div>
         <div className="flex gap-2">
           <button
             onClick={exportCSV}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-gray-200 dark:border-dark-700 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-dark-700 transition-colors"
+            className="flex items-center gap-2 px-3 py-2 rounded-xl border border-gray-200 dark:border-gray-700 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
           >
-            <Download size={16} /> Export CSV
+            <Download size={16} /> <span className="hidden sm:inline">Export CSV</span>
           </button>
           <button
             onClick={() => { setEditing(null); setModalOpen(true); }}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-primary-500 hover:bg-primary-600 text-white text-sm font-semibold transition-colors"
+            className="flex items-center gap-2 px-3 py-2 rounded-xl bg-primary-500 hover:bg-primary-600 text-white text-sm font-semibold transition-colors"
           >
-            <Plus size={16} /> Add New
+            <Plus size={16} /> <span className="hidden sm:inline">Add New</span>
           </button>
         </div>
       </div>

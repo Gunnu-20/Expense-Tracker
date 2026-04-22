@@ -156,7 +156,8 @@ npm start
 ---
 
 ## 🌐 Live Demo
-https://expense-tracker-client-zf2q.onrender.com
+
+https://expense-tracker-client-zf2q.onrender.com/login
 
 ---
 

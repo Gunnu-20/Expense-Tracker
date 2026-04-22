@@ -156,7 +156,7 @@ npm start
 ---
 
 ## 🌐 Live Demo
-(Add your deployed link here - Vercel / Render)
+https://expense-tracker-client-zf2q.onrender.com
 
 ---
 
